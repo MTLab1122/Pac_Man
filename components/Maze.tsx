@@ -6,9 +6,10 @@ import { CellType } from '@/types/game';
 interface MazeProps {
   eatenPellets: Set<string>;
   eatenPowerPellets: Set<string>;
+  cellSize?: number;
 }
 
-export default function Maze({ eatenPellets, eatenPowerPellets }: MazeProps) {
+export default function Maze({ eatenPellets, eatenPowerPellets, cellSize = CELL_SIZE }: MazeProps) {
   const getCellKey = (x: number, y: number) => `${x},${y}`;
 
   return (
@@ -25,10 +26,10 @@ export default function Maze({ eatenPellets, eatenPowerPellets }: MazeProps) {
                 key={cellKey}
                 className="absolute bg-maze-blue border-2 border-blue-900"
                 style={{
-                  left: `${x * CELL_SIZE}px`,
-                  top: `${y * CELL_SIZE}px`,
-                  width: `${CELL_SIZE}px`,
-                  height: `${CELL_SIZE}px`,
+                  left: `${x * cellSize}px`,
+                  top: `${y * cellSize}px`,
+                  width: `${cellSize}px`,
+                  height: `${cellSize}px`,
                 }}
               />
             );
@@ -40,10 +41,10 @@ export default function Maze({ eatenPellets, eatenPowerPellets }: MazeProps) {
                 key={cellKey}
                 className="absolute flex items-center justify-center"
                 style={{
-                  left: `${x * CELL_SIZE}px`,
-                  top: `${y * CELL_SIZE}px`,
-                  width: `${CELL_SIZE}px`,
-                  height: `${CELL_SIZE}px`,
+                  left: `${x * cellSize}px`,
+                  top: `${y * cellSize}px`,
+                  width: `${cellSize}px`,
+                  height: `${cellSize}px`,
                 }}
               >
                 <div
@@ -63,10 +64,10 @@ export default function Maze({ eatenPellets, eatenPowerPellets }: MazeProps) {
                 key={cellKey}
                 className="absolute flex items-center justify-center"
                 style={{
-                  left: `${x * CELL_SIZE}px`,
-                  top: `${y * CELL_SIZE}px`,
-                  width: `${CELL_SIZE}px`,
-                  height: `${CELL_SIZE}px`,
+                  left: `${x * cellSize}px`,
+                  top: `${y * cellSize}px`,
+                  width: `${cellSize}px`,
+                  height: `${cellSize}px`,
                 }}
               >
                 <div

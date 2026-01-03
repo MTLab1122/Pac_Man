@@ -59,6 +59,29 @@ export function useGame() {
 
   const getCellKey = (x: number, y: number) => `${x},${y}`;
 
+  const handleDirection = useCallback((direction: 'up' | 'down' | 'left' | 'right') => {
+    if (gameState.gameStatus === 'start') {
+      setGameState((prev) => ({ ...prev, gameStatus: 'playing' }));
+    }
+    if (gameState.gameStatus === 'playing') {
+      setPacman((prev) => ({ ...prev, nextDirection: direction }));
+    }
+  }, [gameState.gameStatus]);
+
+  const handleStart = useCallback(() => {
+    if (gameState.gameStatus === 'start') {
+      setGameState((prev) => ({ ...prev, gameStatus: 'playing' }));
+    }
+  }, [gameState.gameStatus]);
+
+  const handlePause = useCallback(() => {
+    if (gameState.gameStatus === 'playing') {
+      setGameState((prev) => ({ ...prev, gameStatus: 'paused' }));
+    } else if (gameState.gameStatus === 'paused') {
+      setGameState((prev) => ({ ...prev, gameStatus: 'playing' }));
+    }
+  }, [gameState.gameStatus]);
+
   const handleKeyPress = useCallback((key: string) => {
     if (gameState.gameStatus === 'start') {
       setGameState((prev) => ({ ...prev, gameStatus: 'playing' }));
@@ -494,6 +517,9 @@ export function useGame() {
     eatenPellets,
     eatenPowerPellets,
     handleKeyPress,
+    handleDirection,
+    handleStart,
+    handlePause,
     resetGame,
     startNextLevel,
   };
