@@ -121,12 +121,20 @@ export function useGame() {
       // Check for pellets
       const cellKey = getCellKey(newPosition.x, newPosition.y);
       if (isPellet(newPosition.x, newPosition.y) && !eatenPellets.has(cellKey)) {
-        setEatenPellets((prev) => new Set([...prev, cellKey]));
+        setEatenPellets((prev) => {
+          const newSet = new Set(prev);
+          newSet.add(cellKey);
+          return newSet;
+        });
         setGameState((prev) => ({ ...prev, score: prev.score + 10 }));
       }
 
       if (isPowerPellet(newPosition.x, newPosition.y) && !eatenPowerPellets.has(cellKey)) {
-        setEatenPowerPellets((prev) => new Set([...prev, cellKey]));
+        setEatenPowerPellets((prev) => {
+          const newSet = new Set(prev);
+          newSet.add(cellKey);
+          return newSet;
+        });
         setGameState((prev) => ({ ...prev, score: prev.score + 50, powerMode: true, powerModeTimer: POWER_MODE_DURATION }));
         setGhosts((prev) => prev.map((g) => ({ ...g, mode: 'scared' })));
       }
